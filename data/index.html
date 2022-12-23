@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HeaterControl</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<!--link rel="stylesheet" type="text/css" href="all.css"-->
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="pure-min.css">
+<!--script src="gauge.min.js"></script-->
+</head>
+
+<body>
+	<style scoped="">
+.button-active {
+	color: white;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-active {
+	background: rgb(28, 184, 65);
+	/* this is a green */
+}
+</style>
+	<div id="layout">
+		<!-- Menu toggle -->
+		<a href="#menu" id="menuLink" class="menu-link"> <!-- Hamburger icon --> <span></span>
+		</a>
+
+		<div id="menu">
+			<div class="pure-menu">
+				<a class="pure-menu-heading" href="#company">HeatControl v0.0.1</a>
+
+				<ul class="pure-menu-list">
+					<li class="pure-menu-item"><a href="/index.html" class="pure-menu-link">Настройки</a></li>
+					<li class="pure-menu-item"><a href="#contact" class="pure-menu-link">Контакты</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="main">
+			<div class="header">
+				<h1>Показания и настройки</h1>
+				<h2>Текущие значения датчиков и настройки</h2>
+				<p>Уставки температуры должны быть в диапазоне от 5°C до 50°C. </p>
+				<p>Причем уставка выключения должна быть выше уставки включения минимум на 0.5°C, и наоборот. </p>
+			</div>
+
+			<div class="content">
+
+				<h2 class="content-subhead">Контур 1 - Гостинная</h2>
+				<p>
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-Area1_PumpState">Состояние насоса:</label> <input type="text" id="_Area1_PumpState" value="Area1_PumpState"
+								readonly="" /> <span class="pure-form-message-inline">0 - выкл, 1 - вкл</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area1_TemperatureC">Температура:</label> <input type="text" id="_Area1_TemperatureC" value="Area1_TemperatureC" readonly="" />
+							<span class="pure-form-message-inline">°C</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area1_tempPumpON">Уставка ВКЛлючения насоса:</label> <input type="text" id="_Area1_tempPumpON" placeholder="Area1_tempPumpON"
+								onchange="return postSettings()" /> <span class="pure-form-message-inline">Уставка температуры, при которой насос будет включаться (°C) </span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area1_tempPumpOFF">Уставка ОТКЛючения насоса:</label> <input type="text" id="_Area1_tempPumpOFF" placeholder="Area1_tempPumpOFF"
+								onchange="return postSettings()" /> <span class="pure-form-message-inline">Уставка температуры, при которой насос будет выключаться (°C)</span>
+						</div>
+						<div class="pure-controls">
+							<button type="button" class="pure-button pure-button-primary" onclick="return postSettings()">Сохранить</button>
+						</div>
+					</fieldset>
+				</form>
+				</p>
+				
+				
+				<h2 class="content-subhead">Контур 2 - Ванная</h2>
+				<p>
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-Area2_PumpState">Состояние насоса:</label> <input type="text" id="_Area2_PumpState" value="Area2_PumpState"
+								readonly="" /> <span class="pure-form-message-inline">0 - выкл, 1 - вкл</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area2_TemperatureC">Температура:</label> <input type="text" id="_Area2_TemperatureC" value="Area2_TemperatureC" readonly="" />
+							<span class="pure-form-message-inline">°C</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area2_tempPumpON">Уставка ВКЛлючения насоса:</label> <input type="text" id="_Area2_tempPumpON" placeholder="Area2_tempPumpON"
+								onchange="return postSettings()" /> <span class="pure-form-message-inline">Уставка температуры, при которой насос будет включаться (°C) </span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area2_tempPumpOFF">Уставка ОТКЛлючения насоса:</label> <input type="text" id="_Area2_tempPumpOFF" placeholder="Area2_tempPumpOFF"
+								onchange="return postSettings()" /> <span class="pure-form-message-inline">Уставка температуры, при которой насос будет выключаться (°C)</span>
+						</div>
+						<div class="pure-controls">
+							<button type="button" class="pure-button pure-button-primary" onclick="return postSettings()">Сохранить</button>
+						</div>
+					</fieldset>
+				</form>
+				</p>
+				
+				
+				
+				<h2 class="content-subhead">Контур 3 - Вторая Этаж</h2>
+				<p>
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-Area3_PumpState">Состояние насоса:</label> <input type="text" id="_Area3_PumpState" value="Area3_PumpState"
+								readonly="" /> <span class="pure-form-message-inline">0 - выкл, 1 - вкл</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area3_TemperatureC">Температура:</label> <input type="text" id="_Area3_TemperatureC" value="Area3_TemperatureC" readonly="" />
+							<span class="pure-form-message-inline">°C</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area3_tempPumpON">Уставка ВКЛючения насоса:</label> <input type="text" id="_Area3_tempPumpON" placeholder="Area3_tempPumpON"
+								onchange="return postSettings()" /> <span class="pure-form-message-inline">Уставка температуры, при которой насос будет включаться (°C) </span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area3_tempPumpOFF">Уставка ОТКЛлючения насоса:</label> <input type="text" id="_Area3_tempPumpOFF" placeholder="Area3_tempPumpOFF"
+								onchange="return postSettings()" /> <span class="pure-form-message-inline">Уставка температуры, при которой насос будет выключаться (°C)</span>
+						</div>
+						<div class="pure-controls">
+							<button type="button" class="pure-button pure-button-primary" onclick="return postSettings()">Сохранить</button>
+						</div>
+					</fieldset>
+				</form>
+				</p>
+				
+				
+				<h2 class="content-subhead">Контур 4 - Парилка</h2>
+				<p>
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-Area4_TemperatureC">Температура:</label> <input type="text" id="_Area4_TemperatureC" value="Area4_TemperatureC" readonly="" />
+							<span class="pure-form-message-inline">°C</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area4_Humidity">Влажность:</label> <input type="text" id="_Area4_Humidity" value="Area4_Humidity" readonly="" />
+							<span class="pure-form-message-inline">%</span>
+						</div>
+					</fieldset>
+				</form>
+				</p>
+				
+				<h2 class="content-subhead">Контур 5 - Запасной вход для DHT22</h2>
+				<p>
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-Area5_TemperatureC">Температура:</label> <input type="text" id="_Area5_TemperatureC" value="Area5_TemperatureC" readonly="" />
+							<span class="pure-form-message-inline">°C</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area5_Humidity">Влажность:</label> <input type="text" id="_Area5_Humidity" value="Area5_Humidity" readonly="" />
+							<span class="pure-form-message-inline">%</span>
+						</div>
+					</fieldset>
+				</form>
+				</p>
+				
+				<h2 class="content-subhead">Контур 6 - Запасной вход для DHT22</h2>
+				<p>
+				<form class="pure-form pure-form-aligned">
+					<fieldset>
+						<div class="pure-control-group">
+							<label for="aligned-Area6_TemperatureC">Температура:</label> <input type="text" id="_Area6_TemperatureC" value="Area6_TemperatureC" readonly="" />
+							<span class="pure-form-message-inline">°C</span>
+						</div>
+						<div class="pure-control-group">
+							<label for="aligned-Area6_Humidity">Влажность:</label> <input type="text" id="_Area6_Humidity" value="Area6_Humidity" readonly="" />
+							<span class="pure-form-message-inline">%</span>
+						</div>
+					</fieldset>
+				</form>
+				</p>
+				
+			</div>
+		</div>
+	</div>
+
+
+	<script src="ui.js"></script>
+	<script src="script.js"></script>
+	<script>
+	// Get current sensor readings when the page loads
+	window.addEventListener('load', getSettings);
+	window.addEventListener('load', getReadings);
+    </script>
+
+</body>
+</html>
+
+
+
